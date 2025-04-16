@@ -4,9 +4,129 @@
 <head>
   <meta charset="UTF-8">
   <title>歐董今彩539 AI預測系統</title>
+  <style>
+    body { font-family: "Microsoft JhengHei", sans-serif; background: #f5f5f5; margin: 0; }
+    header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+    nav { background: #34495e; padding: 10px; display: flex; justify-content: center; flex-wrap: wrap; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 20px; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; font-size: 14px; }
+    th { background-color: #eee; }
+    .number-button {
+      width: 50px; height: 50px; margin: 4px; background: #ccc; border: none;
+      font-size: 16px; border-radius: 6px;
+    }
+    .number-button.selected {
+      background-color: #ff6600; color: white; font-weight: bold;
+    }
+    .footer {
+      background: #fff3cd; margin-top: 40px; padding: 20px; border-top: 2px solid #ffc107; text-align: center;
+    }
+    .footer img { width: 80px; margin: 10px; }
+    .fortune-quote {
+      font-weight: bold; color: #d35400; font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <h1>歐董偏財神器系統 - 正式版網頁已產出！</h1>
-  <p>請上傳此檔案至 GitHub Pages 倉庫，即可看到完整功能網頁！</p>
+  <header>
+    <h1>歐董今彩539 AI預測系統</h1>
+    <p>科學加持 X 神符護體 X 偏財必中</p>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showTab('history')">歷史命中紀錄</a>
+    <a href="#" onclick="showTab('predict')">AI預測</a>
+    <a href="#" onclick="showTab('manual')">手動選號</a>
+    <a href="#" onclick="showTab('stats')">統計分析</a>
+  </nav>
+
+  <main>
+    <div id="history" class="tab active">
+      <h2>歷史命中紀錄</h2>
+      <table>
+        <tr><th>日期</th><th>預測號碼</th><th>開獎號碼</th><th>命中數</th><th>命中率</th></tr>
+        <tr><td>2025/04/15</td><td>02,05,11,14,16,22,27,33,37,39</td><td>02,03,16,27,39</td><td>4</td><td>80%</td></tr>
+        <tr><td>2025/04/14</td><td>01,06,08,11,12,19,24,30,33,35</td><td>09,10,22,30,33</td><td>2</td><td>40%</td></tr>
+        <tr><td>2025/04/12</td><td>03,09,11,15,18,25,28,31,34,38</td><td>09,11,15,29,31</td><td>4</td><td>80%</td></tr>
+      </table>
+    </div>
+
+    <div id="predict" class="tab">
+      <h2>AI預測（2025/04/16）</h2>
+      <p><strong>預測號碼：</strong> 02, 04, 07, 09, 10, 16, 25, 27, 30, 33</p>
+      <p><strong>開獎號碼：</strong> 02, 03, 16, 27, 39</p>
+      <p><strong>命中數：</strong> 4 ／ <strong>命中率：</strong> 80%</p>
+    </div>
+
+    <div id="manual" class="tab">
+      <h2>手動選號挑戰</h2>
+      <p>請選擇最多 10 個號碼：</p>
+      <div id="manual-buttons" style="display:flex; flex-wrap:wrap; max-width:600px;"></div>
+      <p id="manual-result" style="margin-top:10px;"></p>
+    </div>
+
+    <div id="stats" class="tab">
+      <h2>預測統計分析（即將推出）</h2>
+      <p>尾數分析、連號趨勢、奇偶比例、歷年命中圖將陸續上線！</p>
+    </div>
+
+    <div class="footer">
+      <h3>招財咒語與神秘符圖區塊</h3>
+      <div class="fortune-quote" id="fortune-text"></div>
+      <div>
+        <img src="https://i.imgur.com/tXfPwkF.png" alt="財神符">
+        <img src="https://i.imgur.com/5SIEAv5.png" alt="五芒星">
+        <img src="https://i.imgur.com/jZK7b1L.png" alt="魔法光陣">
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function showTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    const quoteList = [
+      "願今日之運如符所引，財富自來不請自到",
+      "天地人三才和合，偏財自動流向我",
+      "Blessed by the pentacle of prosperity.",
+      "財神護體，虎爺開道，橫財主動敲我門",
+      "一筆入魂，今簽必中"
+    ];
+    document.getElementById("fortune-text").textContent = quoteList[new Date().getDate() % quoteList.length];
+
+    const buttonsArea = document.getElementById("manual-buttons");
+    const resultArea = document.getElementById("manual-result");
+    const actual = [2, 3, 16, 27, 39];
+    let selected = new Set();
+    for (let i = 1; i <= 39; i++) {
+      const btn = document.createElement("button");
+      btn.className = "number-button";
+      btn.textContent = i.toString().padStart(2, '0');
+      btn.onclick = () => {
+        if (selected.has(i)) {
+          selected.delete(i);
+          btn.classList.remove("selected");
+        } else {
+          if (selected.size < 10) {
+            selected.add(i);
+            btn.classList.add("selected");
+          } else {
+            alert("最多只能選10個號碼！");
+          }
+        }
+        const sorted = Array.from(selected).sort((a, b) => a - b);
+        const hits = sorted.filter(n => actual.includes(n)).length;
+        resultArea.innerHTML = `你選了 ${sorted.join(", ")}，中 ${hits} 支，命中率：${Math.round(hits / 5 * 100)}%`;
+      };
+      buttonsArea.appendChild(btn);
+    }
+  </script>
 </body>
 </html>
